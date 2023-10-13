@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CRUD_Operations.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CRUD_Operations.Data
 {
@@ -9,5 +10,6 @@ namespace CRUD_Operations.Data
 
         }
         // This is where we will be addig the models
+        public DbSet<Transaction> Transactions { get; set; }
     }
 }
