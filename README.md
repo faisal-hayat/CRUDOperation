@@ -44,3 +44,11 @@ app.Run();
 ```
 
 --- ---
+
+## Command to build the propgram
+
+```shell
+dotnet build CRUD_Operations.sln
+```
+
+--- ---
