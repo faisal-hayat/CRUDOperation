@@ -62,8 +62,9 @@ namespace CRUD_Operations.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(transaction);
-                await _context.SaveChangesAsync();
+                //_context.Add(transaction);
+                //await _context.SaveChangesAsync();
+                await _transactionRepository.Create(transaction);
                 return RedirectToAction(nameof(Index));
             }
             return View(transaction);

@@ -6,5 +6,6 @@ namespace CRUD_Operations.Repository.IRepository
     {
         // get all students
         Task<IEnumerable<Transaction>> GetAll();
+        Task Create(Transaction transaction);
     }
 }

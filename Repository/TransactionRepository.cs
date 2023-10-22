@@ -15,6 +15,12 @@ namespace CRUD_Operations.Repository
             _dbContext = dbContext;
         }
 
+        public async Task Create(Transaction transaction)
+        {
+            _dbContext.Add(transaction);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<Transaction>> GetAll()
         {
             IEnumerable<Transaction> obj = (IEnumerable<Transaction>)await _dbContext.Transactions.ToListAsync();
