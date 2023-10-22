@@ -73,16 +73,17 @@ namespace CRUD_Operations.Controllers
         // GET: Transactions/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Transactions == null)
-            {
-                return NotFound();
-            }
+            //if (id == null || _context.Transactions == null)
+            //{
+            //    return NotFound();
+            //}
 
-            var transaction = await _context.Transactions.FindAsync(id);
+            var transaction = await _transactionRepository.FindbyId(id);
             if (transaction == null)
             {
                 return NotFound();
             }
+
             return View(transaction);
         }
 
