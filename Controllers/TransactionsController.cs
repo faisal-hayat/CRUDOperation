@@ -7,23 +7,27 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CRUD_Operations.Data;
 using CRUD_Operations.Models;
+using CRUD_Operations.Repository.IRepository;
 
 namespace CRUD_Operations.Controllers
 {
     public class TransactionsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly ITransactionRepository _transactionRepository;
 
-        public TransactionsController(ApplicationDbContext context)
+        public TransactionsController(ApplicationDbContext context, ITransactionRepository transactionRepository)
         {
             _context = context;
+            _transactionRepository = transactionRepository;
         }
 
         // GET: Transactions
         public async Task<IActionResult> Index()
         {
+            // This methid gets all stored records in sql server
               return _context.Transactions != null ? 
-                          View(await _context.Transactions.ToListAsync()) :
+                          View(await _transactionRepository.GetAll()) :
                           Problem("Entity set 'ApplicationDbContext.Transactions'  is null.");
         }
 
