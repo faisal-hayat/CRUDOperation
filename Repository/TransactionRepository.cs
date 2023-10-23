@@ -3,6 +3,7 @@ using CRUD_Operations.Models;
 using CRUD_Operations.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace CRUD_Operations.Repository
 {
@@ -20,6 +21,27 @@ namespace CRUD_Operations.Repository
         {
             _dbContext.Add(transaction);
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<Transaction>? Edit(int id, Transaction transaction)
+        {
+            try
+            {
+                _dbContext.Update(transaction);
+                await _dbContext.SaveChangesAsync();
+                return transaction;
+            }
+            catch(DbUpdateConcurrencyException)
+            {
+                if (!TransactionExists(transaction.Id))
+                {
+                    return null;
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
 
         public async Task<Transaction>? FindbyId(int? id)
@@ -46,6 +68,11 @@ namespace CRUD_Operations.Repository
             IEnumerable<Transaction> obj = (IEnumerable<Transaction>)await _dbContext.Transactions.ToListAsync();
             // throw new NotImplementedException();
             return obj;
+        }
+
+        private bool TransactionExists(int id)
+        {
+            return (_dbContext.Transactions?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
     }

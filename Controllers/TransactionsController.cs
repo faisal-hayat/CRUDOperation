@@ -92,6 +92,7 @@ namespace CRUD_Operations.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,AccountNumber,BeneficiaryName,BankName,SWIFTCode,Amount,Date")] Transaction transaction)
         {
+            // TODO: This needs to be done
             if (id != transaction.Id)
             {
                 return NotFound();
@@ -99,22 +100,28 @@ namespace CRUD_Operations.Controllers
 
             if (ModelState.IsValid)
             {
-                try
+                Transaction obj = await _transactionRepository.Edit(id, transaction);
+                if (obj == null)
                 {
-                    _context.Update(transaction);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TransactionExists(transaction.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+
+                //try
+                //{
+                //    _context.Update(transaction);
+                //    await _context.SaveChangesAsync();
+                //}
+                //catch (DbUpdateConcurrencyException)
+                //{
+                //    if (!TransactionExists(transaction.Id))
+                //    {
+                //        return NotFound();
+                //    }
+                //    else
+                //    {
+                //        throw;
+                //    }
+                //}
                 return RedirectToAction(nameof(Index));
             }
             return View(transaction);

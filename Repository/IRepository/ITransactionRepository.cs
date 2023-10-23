@@ -8,6 +8,7 @@ namespace CRUD_Operations.Repository.IRepository
         Task<IEnumerable<Transaction>> GetAll();
         Task Create(Transaction transaction);
         Task<Transaction>? FindbyId(int? id);
+        Task<Transaction>? Edit(int id, Transaction transaction);
 
         // Task Delete(Transaction transaction);
         // Task<IEnumerable<Transaction>> Update();
