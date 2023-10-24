@@ -124,3 +124,9 @@ namespace CRUD_Operations.Repository.IRepository
 ```
 
 --- ---
+
+## Adding Identity 
+
+- We will be using identity
+
+--- ---
