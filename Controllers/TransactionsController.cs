@@ -154,17 +154,27 @@ namespace CRUD_Operations.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Transactions == null)
+            //if (_context.Transactions == null)
+            //{
+            //    return Problem("Entity set 'ApplicationDbContext.Transactions'  is null.");
+            //}
+
+            bool transactionStatus = _transactionRepository.CheckTransactionExist();
+            if (!transactionStatus)
             {
                 return Problem("Entity set 'ApplicationDbContext.Transactions'  is null.");
             }
-            var transaction = await _context.Transactions.FindAsync(id);
-            if (transaction != null)
-            {
-                _context.Transactions.Remove(transaction);
-            }
+
+            //var transaction = await _context.Transactions.FindAsync(id);
+            //if (transaction != null)
+            //{
+            //    _context.Transactions.Remove(transaction);
+            //}
             
-            await _context.SaveChangesAsync();
+            //await _context.SaveChangesAsync();
+
+            await _transactionRepository.ConformDelete(id);
+
             return RedirectToAction(nameof(Index));
         }
 

@@ -17,6 +17,18 @@ namespace CRUD_Operations.Repository
             _dbContext = dbContext;
         }
 
+        public async Task ConformDelete(int id)
+        {
+            // TODO: we are implementing this one
+            
+            Transaction transaction = await _dbContext.Transactions.FindAsync(id);
+            if (transaction != null)
+            {
+                _dbContext.Transactions.Remove(transaction);
+            }
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task Create(Transaction transaction)
         {
             _dbContext.Add(transaction);
@@ -25,7 +37,6 @@ namespace CRUD_Operations.Repository
 
         public async Task<Transaction>? Delete(int? id)
         {
-            // TODO: we are implementing this one
             if (id == null || _dbContext.Transactions == null)
             {
                 return null;
@@ -91,6 +102,18 @@ namespace CRUD_Operations.Repository
         private bool TransactionExists(int id)
         {
             return (_dbContext.Transactions?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        public bool CheckTransactionExist()
+        {
+            if (_dbContext.Transactions == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
     }

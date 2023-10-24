@@ -11,6 +11,8 @@ namespace CRUD_Operations.Repository.IRepository
         Task<Transaction>? Edit(int id, Transaction transaction);
 
         Task<Transaction>? Delete(int? id);
+        Task ConformDelete(int id);
+        bool CheckTransactionExist();
         // Task<IEnumerable<Transaction>> Update();
     }
 }
