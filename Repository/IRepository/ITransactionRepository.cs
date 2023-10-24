@@ -10,7 +10,7 @@ namespace CRUD_Operations.Repository.IRepository
         Task<Transaction>? FindbyId(int? id);
         Task<Transaction>? Edit(int id, Transaction transaction);
 
-        // Task Delete(Transaction transaction);
+        Task<Transaction>? Delete(int? id);
         // Task<IEnumerable<Transaction>> Update();
     }
 }

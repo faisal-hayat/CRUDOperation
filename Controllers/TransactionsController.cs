@@ -130,18 +130,22 @@ namespace CRUD_Operations.Controllers
         // GET: Transactions/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Transactions == null)
-            {
-                return NotFound();
-            }
+            //if (id == null || _context.Transactions == null)
+            //{
+            //    return NotFound();
+            //}
 
-            var transaction = await _context.Transactions
-                .FirstOrDefaultAsync(m => m.Id == id);
+            //var transaction = await _context.Transactions
+            //    .FirstOrDefaultAsync(m => m.Id == id);
+            //if (transaction == null)
+            //{
+            //    return NotFound();
+            //}
+            Transaction transaction = await _transactionRepository.Delete(id);
             if (transaction == null)
             {
                 return NotFound();
             }
-
             return View(transaction);
         }
 

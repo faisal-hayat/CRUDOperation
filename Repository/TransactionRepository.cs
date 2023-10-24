@@ -23,6 +23,24 @@ namespace CRUD_Operations.Repository
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task<Transaction>? Delete(int? id)
+        {
+            // TODO: we are implementing this one
+            if (id == null || _dbContext.Transactions == null)
+            {
+                return null;
+            }
+
+            var transaction = await _dbContext.Transactions
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (transaction == null)
+            {
+                return null;
+            }
+
+            return transaction;
+        }
+
         public async Task<Transaction>? Edit(int id, Transaction transaction)
         {
             try
