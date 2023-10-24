@@ -128,7 +128,11 @@ namespace CRUD_Operations.Repository.IRepository
 ## Adding Identity 
 
 - We will be using identity
+- Following line has been added for **_add-migration_** and **_update-database_**
 
-
+```c#
+add-migration "migration message" -context CRUD_OperationsContext
+update-database -context CRUD_OperationsContext
+```
 
 --- ---
