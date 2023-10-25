@@ -8,9 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using CRUD_Operations.Data;
 using CRUD_Operations.Models;
 using CRUD_Operations.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CRUD_Operations.Controllers
 {
+    // [Authorize] has been added, so that user with accounts can access it.
+    [Authorize]
     public class TransactionsController : Controller
     {
         private readonly ApplicationDbContext _context;
