@@ -1,0 +1,38 @@
+﻿<!-- let's first add the Layout for it explicitly -->
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row justify-content-center">
+    <div class="col-5 mt-5">
+        <div class="card login-logout-card">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Identity/Account/Login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Identity/Account/Register">Register</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- card body -->
+            <div class="card-body">
+                <div class="row justify-content-center">
+                    <div class="col-10 my-4">
+                        <!-- 
+                            This is layout for login and register page. this page will act as container within which aforementuioned pages will be placed.
+                            RenderBody(); is used to place the child page.
+                        -->
+                        @RenderBody();
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- we have some scripts that needs to be run -->
+@section Scripts{
+    @await RenderSectionAsync("Scripts", required:false);
+}
