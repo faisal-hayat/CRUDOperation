@@ -3,6 +3,7 @@ using CRUD_Operations.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using CRUD_Operations.Data;
+using CRUD_Operations;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -46,7 +47,7 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
+app.UseCustomMiddleware();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
